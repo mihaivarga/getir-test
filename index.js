@@ -1,8 +1,8 @@
-const express = require('express');
 const bodyParser = require('body-parser');
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
-const app = express();
+const createServer = require('./src/server')
+const app = createServer();
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -20,7 +20,7 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
-require('./routes.js')(app);
+require('./src/routes/routes.js')(app);
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 });
